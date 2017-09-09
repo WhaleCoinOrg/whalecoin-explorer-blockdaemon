@@ -18,6 +18,7 @@ var RedisClient *redis.Client
 
 func main() {
 
+
     viper.SetConfigName("config")
     viper.AddConfigPath(".")
     viper.SetDefault("redis.host", "127.0.0.1")
@@ -57,12 +58,13 @@ func main() {
 
     lastBlock++;
 
-    run := 1
 
+
+    run := 1
     for run == 1 {
         for lastBlock <= currentBlock {
             log.Infof("Going to get block #%d", lastBlock)
-            res,err  := EthGetBlockByNumber(strconv.FormatInt(lastBlock, 10), true)
+            res,err  := EthGetBlockByNumber("0x" + strconv.FormatInt(lastBlock, 16), true)
 
             if err != nil {
                 log.Errorf("%s\n", err)
